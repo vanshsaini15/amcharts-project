@@ -73,9 +73,6 @@ const Chart = () => {
   //  const handleFillColor = (color) => {
   //   setConfig(prevState => ({ ...prevState, fillColor: color.hex }))
   //  }
-  const handleSelectData = (color) => {
-    setConfig((prevState) => ({ ...prevState, fillColor: color.hex }));
-  };
 
   return (
     <div>
