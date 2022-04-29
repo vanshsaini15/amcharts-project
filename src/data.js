@@ -6,27 +6,33 @@ let data = {
     },
     {
       category: "Czechia",
-      value: 301.9
+      value: 301.9,
+	  
     },
     {
       category: "Ireland",
-      value: 201.1
+      value: 201.1,
+	  
     },
     {
       category: "Germany",
-      value: 165.8
+      value: 165.8,
+	  
     },
     {
       category: "Australia",
-      value: 139.9
+      value: 139.9,
+	 
     },
     {
       category: "Austria",
-      value: 128.3
+      value: 128.3,
+	 
     },
     {
       category: "UK",
-      value: 99
+      value: 99,
+	  
     }],
 
     "set2": [{
