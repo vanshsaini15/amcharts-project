@@ -9,7 +9,7 @@ import * as am5percent from "@amcharts/amcharts5/percent";
 import "./index.css";
 import data from "./data";
 
-const radArr = [25, 50, 75, 100,];
+const radArr = [25, 50, 75, 90, 100];
 const innerRadArr = [0, 25, 50, 75, 100];
 
 const Chart = () => {
@@ -25,6 +25,7 @@ const Chart = () => {
     strokeColor: "#000000",
     strokeWidth: 0.2,
     legend: true,
+    tooltip: true,
   });
 
   useEffect(() => {
@@ -83,6 +84,11 @@ const Chart = () => {
       strokeWidth: config.strokeWidth,
     });
 
+    series.slices.template.set(
+      "tooltipText",
+      "{category}: [bold]{valuePercentTotal.formatNumber('0.00')}%[/] ({value})"
+    );
+
     if (config.legend) {
       var legend = chart.children.push(
         am5.Legend.new(rootChart.current, {
@@ -96,9 +102,16 @@ const Chart = () => {
 
       legend.data.setAll(series.dataItems);
     }
-    // series.appear(1000, 100);
 
-  
+    if (config.tooltip) {
+      series.slices.template.set(
+        "tooltipText",
+        "{category}: [bold]{valuePercentTotal.formatNumber('0.00')}%[/] ({value})"
+      );
+    } else {
+      series.slices.template.set("tooltipText", "");
+    }
+    // series.appear(1000, 100);
 
     return chart;
   }
@@ -117,6 +130,15 @@ const Chart = () => {
       setConfig((prevState) => ({ ...prevState, legend: false }));
     } else {
       setConfig((prevState) => ({ ...prevState, legend: true }));
+    }
+  };
+
+  const handleHideTooltip = (e) => {
+    const isChecked = e.target.checked;
+    if (isChecked) {
+      setConfig((prevState) => ({ ...prevState, tooltip: false }));
+    } else {
+      setConfig((prevState) => ({ ...prevState, tooltip: true }));
     }
   };
 
@@ -299,11 +321,23 @@ const Chart = () => {
         ></div>
         <div
           className="d-flex flex-row align-items-center justify-content-center"
-          style={{ width: "720px", paddingLeft: "500px", height: "100px" }}
+          style={{ height: "100px" }}
         >
-          <input type="checkbox" className="legend" onClick={handleHideLegend} />
+          <input
+            type="checkbox"
+            className="legend"
+            onClick={handleHideLegend}
+          />
           <p className="">Hide Legend</p>
+
+          <input
+            type="checkbox"
+            className="legend"
+            onClick={handleHideTooltip}
+          />
+          <p className="">Hide Tooltip</p>
         </div>
+        <hr></hr>
       </div>
     </>
   );
