@@ -13,11 +13,11 @@ const radArr = [25, 50, 75, 90, 100];
 const innerRadArr = [0, 25, 50, 75, 100];
 const textTypeArr = ["circular", "radial"];
 
-const Chart = () => {
+const PieChart = () => {
   let rootChart = useRef();
   let firstRender = useRef(true);
 
-  const [value, setValue] = useState("set1");
+  const [ value, setValue] = useState("set1");
 
   //States
 
@@ -44,6 +44,7 @@ const Chart = () => {
     fontSize: 17,
     strokeWidth: 0.2,
   });
+
 
   useEffect(() => {
     if (firstRender.current) {
@@ -85,6 +86,7 @@ const Chart = () => {
         categoryField: "category",
         colorField: "color",
         endAngle: 270,
+        
       })
     );
 
@@ -100,12 +102,16 @@ const Chart = () => {
       alignLabels: config.alignLabels,
     });
 
+    
+
+
     //Slices Config
 
     series.slices.template.setAll({
       fillOpacity: config.fillOpacity,
       stroke: config.strokeColor,
       strokeWidth: config.strokeWidth,
+      templateField: "columnSettings"
     });
 
     //Labels
@@ -115,9 +121,9 @@ const Chart = () => {
       text: "{category}",
       textType: config.textType,
       forceHidden: config.hideLabels,
+      
     });
 
-    series.get("colors").set("colors", {});
 
     let tooltip = am5.Tooltip.new(rootChart.current, {
       getFillFromSprite: false,
@@ -168,6 +174,7 @@ const Chart = () => {
     // series.appear(1000, 100);
 
     return chart;
+    
   }
 
   function selectDataset(e) {
@@ -348,11 +355,11 @@ const Chart = () => {
 
           <span>
             <button
-              disabled={config.fillOpacity == 0}
+              disabled={config.fillOpacity <= 0}
               onClick={() =>
                 setConfig((prevState) => ({
                   ...prevState,
-                  fillOpacity: Number(config.fillOpacity - 0.1).toFixed(1),
+                  fillOpacity: Number(Number(config.fillOpacity - 0.1).toFixed(1)),
                 }))
               }
             >
@@ -370,11 +377,11 @@ const Chart = () => {
               style={{ width: "128px", textAlign: "center" }}
             />
             <button
-              disabled={config.fillOpacity == 1}
+              disabled={config.fillOpacity >= 1}
               onClick={() =>
                 setConfig((prevState) => ({
                   ...prevState,
-                  fillOpacity: Number(config.fillOpacity) + 0.1,
+                  fillOpacity: Number(Number(config.fillOpacity) + 0.1).toFixed(1),
                 }))
               }
             >
@@ -393,7 +400,7 @@ const Chart = () => {
               onClick={() =>
                 setConfig((prevState) => ({
                   ...prevState,
-                  strokeWidth: Number(config.strokeWidth - 0.1).toFixed(1),
+                  strokeWidth: Number(Number(config.strokeWidth - 0.1).toFixed(1)),
                 }))
               }
             >
@@ -414,7 +421,7 @@ const Chart = () => {
               onClick={() =>
                 setConfig((prevState) => ({
                   ...prevState,
-                  strokeWidth: Number(config.strokeWidth) + 0.1,
+                  strokeWidth: Number(Number(config.strokeWidth) + 0.1).toFixed(1),
                 }))
               }
             >
@@ -619,4 +626,4 @@ const Chart = () => {
     </>
   );
 };
-export default Chart;
+export default PieChart;

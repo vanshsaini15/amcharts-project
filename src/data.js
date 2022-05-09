@@ -1,18 +1,26 @@
+
+
 let data = {
   set1: [
     {
       category: "Lithuania",
       value: 501.9,
+      color: "red"
+
+      
      
     },
     {
       category: "Czechia",
       value: 301.9,
+      color: "red"
+
       
     },
     {
       category: "Ireland",
       value: 201.1,
+      color: "red"
      
     },
     {
@@ -85,6 +93,7 @@ let data = {
     {
       category: "Germany",
       value: 165.8,
+
     },
     {
       category: "Australia",
